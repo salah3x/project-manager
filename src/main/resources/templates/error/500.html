@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: nav"></nav>
+<br>
+<div class="container jumbotron alert alert-danger text-center">
+    <h1>Error</h1>
+    <h2>An Internal error has occured</h2>
+    <h2>Please try again</h2>
+    <a href="/">Return to home</a>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
