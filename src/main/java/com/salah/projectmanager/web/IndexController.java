@@ -21,14 +21,14 @@ public class IndexController {
         return "index";
     }
 
-    @RequestMapping(value = "search")
+    @RequestMapping(value = "search", method = {RequestMethod.GET,RequestMethod.POST})
     public String search(@RequestParam String p, Model model){
         model.addAttribute("title", "Search");
         model.addAttribute("keyword", "You searched for: "+p);
         return "search";
     }
 
-    @RequestMapping(value = "wiki")
+    @RequestMapping(value = "wiki", method = RequestMethod.GET)
     public String wiki(Model model) {
         model.addAttribute("title", "Wiki");
         return "wiki";

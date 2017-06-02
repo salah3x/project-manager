@@ -25,7 +25,10 @@ public class User {
     private String email;
 
     @Length(min = 3, max = 20, message = "Password between 3 and 20 char")
+    @Transient
     private String password;
+
+    private String cryptPassword;
 
     private String avatar;
 
@@ -37,19 +40,85 @@ public class User {
     )
     private Collection<Role> roles;
 
-    @ManyToMany
-    @JoinTable(
-            name = "user_project",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id")
-    )
+    @ManyToMany(mappedBy = "users")
     private Collection<Project> projects;
 
-    @ManyToOne
-    @JoinTable(
-            name = "user_task",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "task_id", referencedColumnName = "id")
-    )
+    @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH)
     private Collection<Task> tasks;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "request_id")
+    private ManagerRequest request;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getCryptPassword() {
+        return cryptPassword;
+    }
+
+    public void setCryptPassword(String cryptPassword) {
+        this.cryptPassword = cryptPassword;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Collection<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
+
+    public Collection<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Collection<Project> projects) {
+        this.projects = projects;
+    }
+
+    public Collection<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(Collection<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public ManagerRequest getRequest() {
+        return request;
+    }
+
+    public void setRequest(ManagerRequest request) {
+        this.request = request;
+    }
 }
