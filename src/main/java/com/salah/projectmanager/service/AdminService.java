@@ -14,6 +14,8 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public interface AdminService {
     List<ManagerRequest> getRequest();
+
     void acceptRequest(int idReq);
+
     List<Message> getMessages();
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 /**
  * Created by bnadem on 6/2/17.
  */
+@Entity
 public class Task {
 
     @Id
@@ -35,6 +36,14 @@ public class Task {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -98,5 +107,20 @@ public class Task {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", state='" + state + '\'' +
+                ", initDate=" + initDate +
+                ", finishDate=" + finishDate +
+                ", realFinishDate=" + realFinishDate +
+                ", project=" + project +
+                ", user=" + user +
+                '}';
     }
 }

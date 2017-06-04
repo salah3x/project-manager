@@ -24,9 +24,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="/projects">Projects</a></li>
-                <li><a href="/profile">Profile</a></li>
                 <li><a href="/wiki">Wiki</a></li>
                 <li><a href="#contact">Contact us</a></li>
             </ul>
@@ -36,16 +35,25 @@
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-            <ul class="nav navbar-nav navbar-right">
-                <li sec:authorize="isAuthenticated()" th:text="${session.user}" th:unless="${session == null}">
+            <ul sec:authorize="isAuthenticated()" class="nav navbar-nav navbar-right">
+                <li sec:authorize="hasAuthority('Admin')">
+                    <a href="/console"><span class="glyphicon glyphicon-wrench"></span>Console</a>
                 </li>
-                <li sec:authorize="isAuthenticated()">
-                    <a href="/signout"><span class="glyphicon glyphicon-log-out"></span>Sign out</a>
+                <li>
+                    <a href="/profile">
+                        <img th:src="@{/img/img_avatar2.png}" width="25" class="img-circle"/>
+                        <span sec:authentication="name"></span>
+                    </a>
                 </li>
-                <li sec:authorize="!isAuthenticated()">
+                <li>
+                    <a href="/logout"><span class="glyphicon glyphicon-log-out"></span>Sign out</a>
+                </li>
+            </ul>
+            <ul sec:authorize="!isAuthenticated()" class="nav navbar-nav navbar-right" >
+                <li>
                     <a href="/signin"><span class="glyphicon glyphicon-log-in"></span>Sign in</a>
                 </li>
-                <li sec:authorize="!isAuthenticated()">
+                <li>
                     <a href="/signup"><span class="glyphicon glyphicon-log-in"></span>Sign up</a>
                 </li>
 

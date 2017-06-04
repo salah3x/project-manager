@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by bnadem on 5/30/17.
@@ -32,13 +33,15 @@ public class User {
 
     private String avatar;
 
-    @ManyToMany
+    private Integer failedLoginAttempts = 0;
+
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_role",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
     )
-    private Collection<Role> roles;
+    private List<Role> roles;
 
     @ManyToMany(mappedBy = "users")
     private Collection<Project> projects;
@@ -49,6 +52,14 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "request_id")
     private ManagerRequest request;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getUsername() {
         return username;
@@ -90,11 +101,19 @@ public class User {
         this.avatar = avatar;
     }
 
-    public Collection<Role> getRoles() {
+    public Integer getFailedLoginAttempts() {
+        return failedLoginAttempts;
+    }
+
+    public void setFailedLoginAttempts(Integer failedLoginAttempts) {
+        this.failedLoginAttempts = failedLoginAttempts;
+    }
+
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public void setRoles(Collection<Role> roles) {
+    public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
 
@@ -120,5 +139,20 @@ public class User {
 
     public void setRequest(ManagerRequest request) {
         this.request = request;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", cryptPassword='" + cryptPassword + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", roles=" + roles +
+                ", projects=" + projects +
+                ", tasks=" + tasks +
+                ", request=" + request +
+                '}';
     }
 }

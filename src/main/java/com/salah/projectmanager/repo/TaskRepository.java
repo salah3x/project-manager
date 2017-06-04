@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
  * Created by bnadem on 6/2/17.
  */
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Integer>{
+public interface TaskRepository extends JpaRepository<Task, Integer> {
 }

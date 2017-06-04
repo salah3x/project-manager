@@ -7,6 +7,7 @@ import javax.persistence.*;
 /**
  * Created by bnadem on 6/2/17.
  */
+@Entity
 public class ManagerRequest {
 
     @Id
@@ -18,6 +19,14 @@ public class ManagerRequest {
 
     @OneToOne(mappedBy = "request")
     private User user;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getMessage() {
         return message;
@@ -33,5 +42,14 @@ public class ManagerRequest {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Override
+    public String toString() {
+        return "ManagerRequest{" +
+                "id=" + id +
+                ", message='" + message + '\'' +
+                ", user=" + user +
+                '}';
     }
 }

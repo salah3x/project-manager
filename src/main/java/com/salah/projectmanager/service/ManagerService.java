@@ -12,13 +12,18 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(rollbackFor = Exception.class)
 public interface ManagerService {
     void addProject(Project project, int idUser);
+
     void updateProject(Project project, int idUser);
+
     void deleteProject(int idProject, int idUser);
 
     void addTask(Task task, int idProject, int idUser);
+
     void updateTask(Task task, int idUser);
+
     void deleteTask(int idTask, int idUser);
 
     void approveTask(int idTask, int idUser);
+
     String getStatistic(int idProject, int idUser);
 }

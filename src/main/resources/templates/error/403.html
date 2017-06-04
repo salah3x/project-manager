@@ -3,7 +3,13 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
-
+<br>
+<div class="container jumbotron alert alert-danger text-center">
+    <h1>Access forbidden</h1>
+    <h2>You have no permission to</h2>
+    <h2> perform this action</h2>
+    <a href="/">Return to home</a>
+</div>
 <footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

@@ -9,6 +9,7 @@ import java.util.Date;
 /**
  * Created by bnadem on 6/2/17.
  */
+@Entity
 public class Project {
 
     @Id
@@ -37,6 +38,14 @@ public class Project {
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
     private Collection<Task> tasks;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -92,5 +101,19 @@ public class Project {
 
     public void setTasks(Collection<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", cover='" + cover + '\'' +
+                ", state='" + state + '\'' +
+                ", initDate=" + initDate +
+                ", users=" + users +
+                ", tasks=" + tasks +
+                '}';
     }
 }

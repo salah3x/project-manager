@@ -1,13 +1,13 @@
 buildscript {
-	ext {
-		springBootVersion = '1.5.3.RELEASE'
-	}
-	repositories {
-		mavenCentral()
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+    ext {
+        springBootVersion = '1.5.3.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 apply plugin: 'java'
@@ -16,34 +16,36 @@ apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 jar {
-	baseName = 'project-manager'
-	version = '0.0.1-SNAPSHOT'
+    baseName = 'project-manager'
+    version = '0.0.1-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 
 dependencies {
-	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-	runtime('net.sourceforge.nekohtml:nekohtml:1.9.15')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+    runtime('net.sourceforge.nekohtml:nekohtml:1.9.15')
 
-//	compile('com.h2database:h2')
-    compile('mysql:mysql-connector-java')
-	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('com.h2database:h2')
+//    compile('mysql:mysql-connector-java')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile('com.github.javafaker:javafaker:0.13')
 
-	compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('org.thymeleaf.extras:thymeleaf-extras-springsecurity4:2.1.2.RELEASE')
 
 
-	runtime('org.springframework.boot:spring-boot-devtools')
+    runtime('org.springframework.boot:spring-boot-devtools')
 
-	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 bootRun {
-	addResources = true
+    addResources = true
 }

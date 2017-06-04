@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping(value = "projects")
 public class ProjectController {
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index(Model model){
+    public String index(Model model) {
         model.addAttribute("title", "Projects");
         return "projects/index";
     }

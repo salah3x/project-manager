@@ -17,26 +17,17 @@ public class UserController {
         model.addAttribute("title", "Sign in");
         return "signin";
     }
-    @RequestMapping(value = "signin", method = RequestMethod.POST)
-    public String signinPost(Model model) {
-        model.addAttribute("title", "Sign in");
 
-        return "redirect:/";
-    }
     @RequestMapping(value = "signup", method = RequestMethod.GET)
     public String signupGet(Model model) {
         model.addAttribute("title", "Sign up");
         return "signup";
     }
+
     @RequestMapping(value = "signup", method = RequestMethod.POST)
     public String signupPost(Model model) {
         model.addAttribute("title", "Sign up");
 
         return "redirect:/";
     }
-    @RequestMapping(value = "signout")
-    public String signout() {
-        return "redirect:/";
-    }
-
 }

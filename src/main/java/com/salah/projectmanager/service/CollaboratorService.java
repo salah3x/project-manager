@@ -15,8 +15,12 @@ import java.util.List;
 @Transactional(rollbackFor = Exception.class)
 public interface CollaboratorService {
     void sendManagerRequest(ManagerRequest req, int idUser);
+
     void confirmTask(int idTask, int idUser);
+
     List<Project> getAllProjects(int idUser);
+
     Project getProjectWithTasks(int idProject, int idUser);
+
     List<Task> getAllTasks(int idUser);
 }
