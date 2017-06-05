@@ -5,6 +5,7 @@
 <nav th:replace="fragments :: nav"></nav>
 <div class="container">
     <h2 class="jumbotron alert alert-info" th:text="${keyword}">You searched for: </h2>
+    <ul th:text="${projects}"></ul>
 </div>
 <footer th:replace="fragments :: footer"></footer>
 </body>

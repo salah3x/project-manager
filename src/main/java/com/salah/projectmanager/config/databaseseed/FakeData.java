@@ -48,7 +48,11 @@ public class FakeData implements ApplicationListener<ContextRefreshedEvent> {
         for (int i = 0; i < 10; i++) {
             m = new Message();
             m.setSender(faker.internet().emailAddress());
-            m.setMessage(faker.lorem().characters(20, 150));
+            String msg;
+            do{
+                msg = faker.lorem().paragraph(2);
+            }while(msg.length()>200);
+            m.setMessage(msg);
             m.setDate(new Date());
             msgRepo.save(m);
         }

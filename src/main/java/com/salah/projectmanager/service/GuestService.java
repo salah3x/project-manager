@@ -11,8 +11,6 @@ import java.util.List;
 /**
  * Created by bnadem on 6/2/17.
  */
-@Service
-@Transactional(rollbackFor = Exception.class)
 public interface GuestService {
     void signUp(User user);
 

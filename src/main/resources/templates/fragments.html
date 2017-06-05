@@ -74,14 +74,14 @@
             </div>
             <div id="contact" class="col-sm-6">
                 <h3>Contact us :</h3>
-                <form action="/message" method="post">
+                <form action="/message" method="get">
                     <div class="form-group">
                         <label for="email">Email address:</label>
-                        <input type="email" class="form-control" id="email" required>
+                        <input type="email" class="form-control" id="email" name="email" required>
                     </div>
                     <div class="form-group">
                         <label for="msg">Message:</label>
-                        <textarea type="text" class="form-control" id="msg" required></textarea>
+                        <textarea type="text" class="form-control" id="msg" name="msg" required></textarea>
                     </div>
                     <button type="submit" class="btn btn-default">Submit</button>
                 </form>

@@ -14,51 +14,55 @@
                 </div>
             </div>
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form">
+                <form id="signupform" class="form-horizontal" role="form" th:object="${user}" method="post">
 
-                    <div id="signupalert" style="display:none" class="alert alert-danger">
-                        <p>Error:</p>
-                        <span></span>
+                    <div class="jumbotron alert alert-success" th:if="${param.success}">
+                        <p>Registration completed.</p>
+                        <a href="/signin">Sign in.</a>
+                    </div>
+                    <div class="jumbotron alert alert-danger" th:if="${double}">
+                        <p>Errors:</p>
+                        <span th:text="${double}" class="error"></span>
+                    </div>
+                    <div class="jumbotron alert alert-danger" th:if="${error}">
+                        <p>Errors:</p>
+                        <span th:errors="*{email}" class="error"></span><br>
+                        <span th:errors="*{username}" class="error"></span><br>
+                        <span th:errors="*{password}" class="error"></span>
                     </div>
 
-
                     <div class="form-group">
-                        <label for="email" class="col-md-3 control-label">Email</label>
+                        <label th:for="email" class="col-md-3 control-label">Email</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="email" placeholder="Email Address">
+                            <input th:field="*{email}" class="form-control" placeholder="Email address">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="firstname" class="col-md-3 control-label">First Name</label>
+                        <label th:for="username" class="col-md-3 control-label">First Name</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="firstname" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="lastname" class="col-md-3 control-label">Last Name</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="lastname" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="password" class="col-md-3 control-label">Password</label>
-                        <div class="col-md-9">
-                            <input type="password" class="form-control" id="password" placeholder="Password">
+                            <input th:field="*{username}" class="form-control" placeholder="Username">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="icode" class="col-md-3 control-label">Invitation Code</label>
+                        <label th:for="password" class="col-md-3 control-label">Password</label>
                         <div class="col-md-9">
-                            <input type="text" class="form-control" id="icode" placeholder="">
+                            <input type="password" th:field="*{password}" class="form-control" placeholder="Password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpassword" class="col-md-3 control-label">Confirm Password</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" id="cpassword" placeholder="Confirm Password">
                         </div>
                     </div>
 
                     <div class="form-group">
                         <!-- Button -->
                         <div class="col-md-offset-3 col-md-9">
-                            <button id="btn-signup" type="button" class="btn btn-primary"><i
+                            <button id="btn-signup" type="submit" class="btn btn-primary"><i
                                     class="icon-hand-right"></i>
                                 &nbsp Sign Up
                             </button>
