@@ -3,6 +3,7 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
+
 <div class="alert alert-success col-sm-12 text-center" th:if="${param.success}">
     <div class="hover-btn">
         Message has been sent successfully
@@ -12,7 +13,9 @@
         </button>
     </div>
 </div>
+
 <!-- Header -->
+
 <div class="intro-header">
     <div class="container text-center">
         <div class="row">

@@ -12,6 +12,6 @@ import java.util.List;
  */
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Integer> {
-    @Query("select p from Project p where p.name like %?1%")
+    @Query(value = "select p from Project p where p.name like %?1% or p.description like %?1%")
     List<Project> search(String keyword);
 }

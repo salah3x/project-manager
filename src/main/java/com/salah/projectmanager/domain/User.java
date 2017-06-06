@@ -44,10 +44,10 @@ public class User {
     private List<Role> roles;
 
     @ManyToMany(mappedBy = "users")
-    private Collection<Project> projects;
+    private List<Project> projects;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH)
-    private Collection<Task> tasks;
+    private List<Task> tasks;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "request_id")
@@ -117,19 +117,19 @@ public class User {
         this.roles = roles;
     }
 
-    public Collection<Project> getProjects() {
+    public List<Project> getProjects() {
         return projects;
     }
 
-    public void setProjects(Collection<Project> projects) {
+    public void setProjects(List<Project> projects) {
         this.projects = projects;
     }
 
-    public Collection<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Collection<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 

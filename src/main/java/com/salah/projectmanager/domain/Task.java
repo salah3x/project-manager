@@ -21,7 +21,7 @@ public class Task {
     @Length(min = 3, max = 1000, message = "Description must be between 3 and 1000 characters")
     private String description;
 
-    private String state;
+    private TaskState state;
 
     private Date initDate;
 
@@ -61,11 +61,11 @@ public class Task {
         this.description = description;
     }
 
-    public String getState() {
+    public TaskState getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(TaskState state) {
         this.state = state;
     }
 
@@ -115,7 +115,7 @@ public class Task {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", state='" + state + '\'' +
+                ", state='" + state.getName() + '\'' +
                 ", initDate=" + initDate +
                 ", finishDate=" + finishDate +
                 ", realFinishDate=" + realFinishDate +

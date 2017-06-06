@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by bnadem on 6/2/17.
@@ -24,7 +25,7 @@ public class Project {
 
     private String cover;
 
-    private String state;
+    private ProjectState state;
 
     private Date initDate;
 
@@ -34,10 +35,10 @@ public class Project {
             joinColumns = @JoinColumn(name = "project_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    private Collection<User> users;
+    private List<User> users;
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL)
-    private Collection<Task> tasks;
+    private List<Task> tasks;
 
     public int getId() {
         return id;
@@ -71,11 +72,11 @@ public class Project {
         this.cover = cover;
     }
 
-    public String getState() {
+    public ProjectState getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(ProjectState state) {
         this.state = state;
     }
 
@@ -87,19 +88,19 @@ public class Project {
         this.initDate = initDate;
     }
 
-    public Collection<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 
-    public void setUsers(Collection<User> users) {
+    public void setUsers(List<User> users) {
         this.users = users;
     }
 
-    public Collection<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(Collection<Task> tasks) {
+    public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -110,7 +111,7 @@ public class Project {
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", cover='" + cover + '\'' +
-                ", state='" + state + '\'' +
+                ", state='" + state.getName() + '\'' +
                 ", initDate=" + initDate +
                 ", users=" + users +
                 ", tasks=" + tasks +

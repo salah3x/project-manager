@@ -3,9 +3,25 @@
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
-<div class="container">
-    <h2 class="jumbotron alert alert-info" th:text="${keyword}">You searched for: </h2>
-    <ul th:text="${projects}"></ul>
+<div class="container text-center">
+    <h2 class=" jumbotron alert alert-info">You searched for : <span class="well well-sm" th:text="${keyword}"></span>
+    </h2>
+    <div class="pre-scrollable">
+        <table class="table table-hover table-striped">
+            <tr class="success">
+                <td class="col-sm-2">Name</td>
+                <td class="col-sm-8">Description</td>
+                <td>State</td>
+            </tr>
+            <tr th:each="project : ${projects}">
+                <td>
+                    <a th:href="@{'/projects/' + ${project.id}}" th:text="${project.name}"></a>
+                </td>
+                <td th:text="${project.description}"></td>
+                <td th:text="${project.state.name}"></td>
+            </tr>
+        </table>
+    </div>
 </div>
 <footer th:replace="fragments :: footer"></footer>
 </body>

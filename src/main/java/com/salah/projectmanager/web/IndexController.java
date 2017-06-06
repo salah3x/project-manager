@@ -32,7 +32,7 @@ public class IndexController {
     @RequestMapping(value = "search", method = {RequestMethod.GET, RequestMethod.POST})
     public String search(@RequestParam String p, Model model) {
         model.addAttribute("title", "Search");
-        model.addAttribute("keyword", "You searched for: " + p);
+        model.addAttribute("keyword",p);
         model.addAttribute("projects", guestService.search(p));
         return "search";
     }

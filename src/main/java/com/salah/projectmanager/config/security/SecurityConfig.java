@@ -52,7 +52,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/projects", "/projects/*", "/profile", "/task/*/confirm", "/managerReq/send").access("hasAuthority('Collaborator')")
                 .antMatchers("/projects/new", "/projects/*/edit", "/projects/*/delete", "/projects/*/statistic", "/projects/*/newTask").access("hasAuthority('Manager')")
                 .antMatchers("/task/*/edit", "/task/*/delete", "/task/*/approve").access("hasAuthority('Manager')")
-                .antMatchers("/managerReq/*/accept", "/console/**").access("hasAuthority('Admin')")
+                .antMatchers("/managerReq/*/accept").access("hasAuthority('Admin')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/signin").defaultSuccessUrl("/projects", true).permitAll()
@@ -60,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().logoutSuccessUrl("/signin?signout").permitAll();
         //for H2 Database [Security hole | avoid in production]
+        httpSecurity.authorizeRequests().antMatchers("/console/**").permitAll();
         httpSecurity.csrf().disable();
         httpSecurity.headers().frameOptions().disable();
     }
