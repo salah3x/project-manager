@@ -1,9 +1,35 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org/">
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="fragments :: head"></head>
 <body>
 <nav th:replace="fragments :: nav"></nav>
+<div class="container">
+    <br>
+    <div class="jumbotron alert alert-info text-center"><h2>Your projects :</h2></div>
+    <div class="row">
+        <div th:each="project : ${projects}" class="col-lg-4 col-md-6 sb-preview text-center marginCostum">
+            <div class="card h-100">
+                <a class="sb-preview-img" th:href="@{'/projects/' + ${project.id}}">
+                    <img th:src="@{/img/banner-bg.jpg}" class="card-img-top img-fluid" width="300">
+                </a>
+                <div class="card-block">
+                    <h4 th:text="${project.name}" class="card-title"></h4>
+                    <p th:text="${project.description}" class="card-text"></p>
+                </div>
+                <div class="card-footer">
+                    <a sec:authorize="hasAuthority('Manager')" class="btn btn-warning btn-sm" th:href="@{'/projects/' + ${project.id}} +'/edit'">Edit</a>
+                    <a sec:authorize="hasAuthority('Admin')" class="btn btn-danger btn-sm" th:href="@{'/projects/' + ${project.id}} +'/delete'">Delete</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6 sb-preview text-center marginCostum jumbotron">
+            <a href="/projects/new">
+            <span class="glyphicon glyphicon-plus" style="font-size:100px"></span>
+            </a>
+        </div>
+    </div>
 
+</div>
 <footer th:replace="fragments :: footer"></footer>
 </body>
 </html>

@@ -40,7 +40,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
     @Override
     public void confirmTask(int idTask, String username) {
         Task task = taskRepository.findOne(idTask);
-        if (task.getUser().equals(userRepository.findByUsername(username))){
+        if (task != null && task.getUser().equals(userRepository.findByUsername(username))){
             task.setState(TaskState.CONFIRMED);
             taskRepository.save(task);
         }
@@ -54,7 +54,7 @@ public class CollaboratorServiceImpl implements CollaboratorService {
     @Override
     public Project getProjectWithTasks(int idProject, String username) {
         Project project = projectRepository.findOne(idProject);
-        if (project.getUsers().contains(userRepository.findByUsername(username)))
+        if (project != null && project.getUsers().contains(userRepository.findByUsername(username)))
             return project;
         return null;
     }

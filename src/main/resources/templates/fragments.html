@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title th:text="${title}"> Title </title>
+    <title th:text="${title}"></title>
     <link rel="stylesheet" th:href="@{css/bootstrap.min.css}"/>
     <link rel="stylesheet" th:href="@{/css/main.css}"/>
 </head>
@@ -44,7 +44,7 @@
                     <li sec:authorize="hasAuthority('Admin')">
                         <a href="/console"><span class="glyphicon glyphicon-wrench"></span>Console</a>
                     </li>
-                    <li class="divider"></li>
+                    <li class="divider" sec:authorize="hasAuthority('Admin')"></li>
                     <li>
                         <a href="/profile"><span class="glyphicon glyphicon-user"></span>Profile</a>
                     </li>

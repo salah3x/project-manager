@@ -101,7 +101,7 @@ public class FakeData implements ApplicationListener<ContextRefreshedEvent> {
         // Inserting 5 projects and assigning users
         for (int i=0; i<5; i++) {
             Project p = new Project();
-            p.setName("project "+(i+1));
+            p.setName("Project "+(i+1));
             String msg;
             do {
                 msg = faker.lorem().paragraph(4);
@@ -136,7 +136,7 @@ public class FakeData implements ApplicationListener<ContextRefreshedEvent> {
         // Inserting tasks to project 1
         for (int i=0; i<7;i++) {
             Task t = new Task();
-            t.setTitle("task "+(i+1));
+            t.setTitle("Task "+(i+1));
             String msg;
             do {
                 msg = faker.lorem().paragraph(4);

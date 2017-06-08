@@ -24,7 +24,7 @@ public class IndexController {
     private GuestService guestService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String index(Model model, Principal principal) {
+    public String index(Model model) {
         model.addAttribute("title", "Project Manager");
         return "index";
     }
@@ -44,7 +44,7 @@ public class IndexController {
     }
 
     @RequestMapping(value = "message", method = RequestMethod.GET)
-    public String message(Model model, @RequestParam String email, @RequestParam String msg) {
+    public String message(@RequestParam String email, @RequestParam String msg) {
         Message m= new Message();
         m.setMessage(msg);
         m.setSender(email);
