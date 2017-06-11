@@ -49,11 +49,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
                 .antMatchers("/", "/signup", "/search", "/wiki", "/message").permitAll()
-                .antMatchers("/projects", "/projects/*", "/profile", "/task/*/confirm", "/managerReq/send").access("hasAuthority('Collaborator')")
-                .antMatchers("/projects/new", "/projects/*/edit", "/projects/*/delete", "/projects/*/statistic", "/projects/*/newTask").access("hasAuthority('Manager')")
-                .antMatchers("/task/*/edit", "/task/*/delete", "/task/*/approve").access("hasAuthority('Manager')")
+                .antMatchers("/projects/new", "/projects/*/edit", "/projects/*/delete", "/projects/*/statistic", "/projects/*/task/new", "/project/*/task/*/edit", "/project/*/task/*/delete", "/project/*/task/*/approve").access("hasAuthority('Manager')")
+                .antMatchers("/projects", "/projects/*", "/profile", "/project/*/task/*/confirm", "/managerReq/send").access("hasAuthority('Collaborator')")
                 .antMatchers("/managerReq/*/accept").access("hasAuthority('Admin')")
-                .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/signin").defaultSuccessUrl("/projects", true).permitAll()
                 .usernameParameter("username").passwordParameter("password")

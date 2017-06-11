@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: nav"></nav>
+<div class="container">
+    <div class="container text-center">
+        <img th:src="@{/img/banner-bg.jpg}" width="100%" height="300px">
+        <div class="row jumbotron alert alert-info">
+            <h1 th:text="${project.name}"></h1>
+            <a sec:authorize="hasAuthority('Manager')" class="btn btn-info" th:href="@{'/projects/' + ${project.id} + '/statistic'}">View statistic</a>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <h3>Description :</h3>
+                <div class="well">
+                    <p th:text="${project.description}"></p>
+                </div>
+                <h3>Started at :</h3>
+                <div class="well">
+                    <p th:text="${project.initDate}"></p>
+                </div>
+                <h3>Project state :</h3>
+                <div class="well">
+                    <p th:text="${project.state.name}"></p>
+                </div>
+                <div>
+                    <h3>Tasks :</h3>
+                    <a sec:authorize="hasAuthority('Manager')" class="btn btn-success" th:href="@{'/projects/' + ${project.id} + '/task/new'}">Add a new task</a>
+                    <hr>
+                </div>
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>Title</td>
+                        <td>Description</td>
+                        <td>State</td>
+                        <td>Initial date</td>
+                        <td>Finish date</td>
+                        <td>Assigned to</td>
+                        <td sec:authorize="hasAuthority('Manager')">Delete</td>
+                        <td sec:authorize="hasAuthority('Manager')">Edit</td>
+                    </tr>
+                    <tr th:each="task : ${project.tasks}">
+                        <td th:text="${task.title}"></td>
+                        <td th:text="${task.description}"></td>
+                        <td th:text="${task.state.name}"></td>
+                        <td th:text="${task.initDate}"></td>
+                        <td th:text="${task.finishDate}"></td>
+                        <td>
+                            <a th:href="@{'/profile/' + ${task.user.id}}" th:text="${task.user.username}"></a>
+                        </td>
+                        <td sec:authorize="hasAuthority('Manager')">
+                            <a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id} + '/delete'}">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                        <td sec:authorize="hasAuthority('Manager')">
+                            <a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id} + '/edit'}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
+</body>
+</html>

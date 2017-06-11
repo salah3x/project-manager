@@ -22,7 +22,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6 sb-preview text-center marginCostum jumbotron">
+        <div sec:authorize="hasAuthority('Manager')" class="col-lg-4 col-md-6 sb-preview text-center marginCostum jumbotron">
             <a href="/projects/new">
             <span class="glyphicon glyphicon-plus" style="font-size:100px"></span>
             </a>

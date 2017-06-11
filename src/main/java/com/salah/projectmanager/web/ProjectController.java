@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
+import java.util.Map;
 
 /**
  * Created by bnadem on 5/20/17.
@@ -35,7 +36,7 @@ public class ProjectController {
 
     @RequestMapping(value = "new", method = RequestMethod.GET)
     public String newGet(Model model) {
-        model.addAttribute("title", "Add/Edit project");
+        model.addAttribute("title", "Add project");
         model.addAttribute("project", new Project());
         model.addAttribute("projectState", ProjectState.values());
         return "projects/form";
@@ -46,6 +47,7 @@ public class ProjectController {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add project");
             model.addAttribute("error", "error");
+            model.addAttribute("projectState", ProjectState.values());
             return "projects/form";
         }
         project.setCover("cover.jpg");
@@ -78,5 +80,19 @@ public class ProjectController {
         project.setId(Integer.parseInt(id));
         managerService.updateProject(project ,principal.getName());
         return "redirect:/projects/new?successEdit";
+    }
+
+    @RequestMapping(value = "{id}/statistic", method = RequestMethod.GET)
+    @ResponseBody
+    public Map<String, Object> statistic(@PathVariable String id, Principal principal) {
+        return managerService.getStatistic(Integer.parseInt(id), principal.getName());
+    }
+
+    @RequestMapping(value = "{id}")
+    public String home (@PathVariable String id, Principal principal, Model model) {
+        Project p = collaboratorService.getProjectWithTasks(Integer.parseInt(id), principal.getName());
+        model.addAttribute("title", "Project Manager | "+p.getName());
+        model.addAttribute("project", p);
+        return "projects/home";
     }
 }

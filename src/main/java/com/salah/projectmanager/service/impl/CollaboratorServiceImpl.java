@@ -53,10 +53,8 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 
     @Override
     public Project getProjectWithTasks(int idProject, String username) {
-        Project project = projectRepository.findOne(idProject);
-        if (project != null && project.getUsers().contains(userRepository.findByUsername(username)))
-            return project;
-        return null;
+       return projectRepository.findOne(idProject);
+
     }
 
     @Override

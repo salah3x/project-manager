@@ -8,14 +8,14 @@
          class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Add/Edit a project</div>
+                <div class="panel-title" th:text="${title}">Add/Edit a task</div>
             </div>
             <div class="panel-body">
-                <form id="signupform" class="form-horizontal" role="form" th:object="${project}" method="post">
+                <form id="signupform" class="form-horizontal" role="form" th:object="${task}" method="post">
 
                     <div class="jumbotron alert alert-success" th:if="${param.success}">
-                        <p>Project added successfully.</p>
-                        <a href="/projects">Back to projects</a>
+                        <p>Task added successfully.</p>
+                        <a th:href="@{'/projects/' + ${projectId}}">Back to project</a>
                     </div>
                     <div class="jumbotron alert alert-success" th:if="${param.successEdit}">
                         <p>Project Edited successfully.</p>
@@ -23,14 +23,14 @@
                     </div>
                     <div class="jumbotron alert alert-danger" th:if="${error}">
                         <p>Errors:</p>
-                        <span th:errors="*{name}" class="error"></span><br>
-                        <span th:errors="*{description}" class="error"></span>
+                        <span th:errors="*{title}" class="error">zad</span><br>
+                        <span th:errors="*{description}" class="error">dza</span>
                     </div>
 
                     <div class="form-group">
-                        <label th:for="name" class="col-md-3 control-label">Name :</label>
+                        <label th:for="title" class="col-md-3 control-label">Title :</label>
                         <div class="col-md-9">
-                            <input th:field="*{name}" class="form-control">
+                            <input th:field="*{title}" class="form-control">
                         </div>
                     </div>
 
@@ -42,12 +42,23 @@
                     </div>
 
                     <div class="form-group">
-                        <label th:for="state" class="col-md-3 control-label">Project's state:</label>
+                        <label th:for="state" class="col-md-3 control-label">Task's state:</label>
                         <div class="col-md-9">
                             <select th:field="*{state}" class="form-control">
-                                <option th:each="pstate : ${projectState}"
-                                        th:text="${pstate.name}"
-                                        th:value="${pstate}"></option>
+                                <option th:each="tstate : ${taskState}"
+                                        th:text="${tstate.name}"
+                                        th:value="${tstate}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label th:for="state" class="col-md-3 control-label">Assign to user:</label>
+                        <div class="col-md-9">
+                            <select name="u" class="form-control">
+                                <option th:each="user : ${users}"
+                                        th:text="${user.username}"
+                                        th:value="${user.username}"></option>
                             </select>
                         </div>
                     </div>
