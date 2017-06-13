@@ -10,6 +10,11 @@ Cette application permet au utilisateur de créer des projets.
 Chaque projet contient des taches à réaliser.
 Chaque tache est assignée à un utilisateur.
 
+## La base de donnée
+
+La base de donneé utilisée est **H2 Database** (in memory database).
+La classe **Fakedata.java** dans le package config.databaseseed s'occupe d'initialiser, au démmarage de l'application, la base de donnée avec des enregistrement aléatoire en utilisant DIUS/javafaker(https://github.com/DiUS/java-faker).
+
 ## Les Utilisateurs
 
 Les utilisateurs ont des fonctionalitées différents selon leurs roles.
@@ -33,4 +38,29 @@ De même un **manager** est un collaborateur.
 * Spring MVC
 * Thymeleaf
 * Spring security
+
+## Installation
+
+* Télécharger ou cloner le code source depuis git repository
+```
+git clone http://github.com/salah3x/project-manager
+```
+* Naviguer vers le dossier téléchargé
+```
+
+cd [Path to project-manager]
+```
+* Démarer l'application :
+```
+./gradlw bootRun
+```
+ou éxécuter directement le jar
+```
+./gradlw bootRepackage
+java -jar build/libs/project-manager-0.0.1-SNAPSHOT.jar
+```
+**Remarque 1:**
+La commande ./gradlw necessite une connexion internet et peut pendre du temps pour télécharger les dépendeces de l'application.
+**Remarque 2:**
+Pour démarer l'application sous windows utiliser le fichier gradlw.bat au lieu du gradlw.
 
