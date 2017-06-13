@@ -49,3 +49,7 @@ dependencies {
 bootRun {
     addResources = true
 }
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.0'
+}
