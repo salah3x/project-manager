@@ -30,6 +30,9 @@ public class TaskController {
     @Autowired
     private GuestService guestService;
 
+    @Autowired
+    private CollaboratorService collaboratorService;
+
     @RequestMapping(value = "{id}/task/new", method = RequestMethod.GET)
     public String newtaskGet(Model model, @PathVariable String id) {
         model.addAttribute("title", "Add task");
@@ -44,7 +47,7 @@ public class TaskController {
     public String newtaskPost(Model model, @PathVariable String idP, @ModelAttribute @Valid Task task, Errors errors, Principal principal, @RequestParam String u) {
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add task");
-            model.addAttribute("error", "error");
+            model.addAttribute("errorTask", "errorTask");
             model.addAttribute("task", new Task());
             model.addAttribute("taskState", TaskState.values());
             model.addAttribute("users", managerService.getCollaboratorsList());
@@ -86,5 +89,11 @@ public class TaskController {
         task.setFinishDate(new Date());//add to formTask
         managerService.addTask(task,Integer.parseInt(idP),principal.getName());
         return "redirect:/projects/"+idP+"/task/new?success";
+    }
+
+    @RequestMapping(value = "{idP}/task/{id}/confirm", method = RequestMethod.GET)
+    public String confirm(@PathVariable String idP, @PathVariable String id, Principal principal) {
+        collaboratorService.confirmTask(Integer.parseInt(id), principal.getName());
+        return "redirect:/profile?confirmed";
     }
 }

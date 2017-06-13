@@ -33,8 +33,11 @@ public class CollaboratorServiceImpl implements CollaboratorService {
 
     @Override
     public void sendManagerRequest(ManagerRequest req, String username) {
-        req.setUser(userRepository.findByUsername(username));
-        requestRepository.save(req);
+        User user =userRepository.findByUsername(username);
+        if (user.getRequest() == null) {
+            req.setUser(user);
+            requestRepository.save(req);
+        }
     }
 
     @Override

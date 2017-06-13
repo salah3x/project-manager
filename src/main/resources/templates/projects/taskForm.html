@@ -21,10 +21,10 @@
                         <p>Project Edited successfully.</p>
                         <a href="/projects">Back to projects</a>
                     </div>
-                    <div class="jumbotron alert alert-danger" th:if="${error}">
+                    <div class="jumbotron alert alert-danger" th:if="${errorTask}">
                         <p>Errors:</p>
-                        <span th:errors="*{title}" class="error">zad</span><br>
-                        <span th:errors="*{description}" class="error">dza</span>
+                        <span th:errors="*{title}" class="error"></span><br>
+                        <span th:errors="*{description}" class="error"></span>
                     </div>
 
                     <div class="form-group">

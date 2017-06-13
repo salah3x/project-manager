@@ -47,7 +47,7 @@
                         <td th:text="${task.initDate}"></td>
                         <td th:text="${task.finishDate}"></td>
                         <td>
-                            <a th:href="@{'/profile/' + ${task.user.id}}" th:text="${task.user.username}"></a>
+                            <a th:href="@{'/profile/' + ${task.user.username}}" th:text="${task.user.username}"></a>
                         </td>
                         <td sec:authorize="hasAuthority('Manager')">
                             <a th:href="@{'/projects/' + ${project.id} + '/task/' + ${task.id} + '/delete'}">

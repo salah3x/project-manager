@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="fragments :: head"></head>
+<body>
+<nav th:replace="fragments :: nav"></nav>
+<div class="alert alert-success col-sm-12 text-center" th:if="${param.confirmed}">
+    <div class="hover-btn">
+        Task has been confirmed successfully
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-danger col-sm-12 text-center" th:if="${param.reqError}">
+    <div class="hover-btn">
+        Request not sent : Message must be between 3 and 200 characters
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
+</div>
+<div class="alert alert-success col-sm-12 text-center" th:if="${param.reqSuccess}">
+    <div class="hover-btn">
+        Request has been sent successfully
+        <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">×</span>
+            <span class="sr-only">Close</span>
+        </button>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2 text-center">
+            <br>
+            <img th:src="@{/img/img_avatar2.png}" width="80%" height="80%">
+            <h3 th:text="${user.username}"></h3>
+            <h4 th:text="${user.email}"></h4>
+            <hr>
+            <h6 th:each="role : ${user.roles}" th:text="${role.role}"></h6>
+            <div sec:authorize="!hasAuthority('Manager')" th:if="!${visitor}">
+                <hr>
+                <form action="/managerReq/send" th:object="${req}" method="post">
+                    <label th:for="message" class="control-label">Send a request</label>
+                    <textarea th:field="*{message}" class="form-control" rows="2" required></textarea>
+                    <button id="btn-signup" type="submit" class="btn btn-primary col-md-12"><i
+                            class="icon-hand-right"></i>
+                        Send
+                    </button>
+                </form>
+                <br>
+            </div>
+            <div sec:authorize="hasAuthority('Admin')" th:if="!${visitor}">
+                <hr>
+                <h4>Users requests</h4>
+                <table class="table table-stripped table-hover table-bordered">
+                    <tr>
+                        <td><b>User</b></td>
+                        <td><b>Message</b></td>
+                    </tr>
+                    <tr th:each="req : ${requests}">
+                        <td th:text="${req.user.username}"></td>
+                        <td th:text="${req.message}"></td>
+                        <td><a th:href="'/managerReq/' + ${req.id} + '/accept'">Accept</a></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </div>
+        <div class="col-sm-10 marginCos">
+            <h2>My tasks</h2>
+            <br>
+            <table class="table table-stripped table-hover">
+                <tr>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>State</td>
+                    <td>Assigned at</td>
+                    <td>Project name</td>
+                    <td th:if="!${visitor}">Confirm</td>
+                </tr>
+                <tr th:each="task : ${user.tasks}">
+                    <td th:text="${task.title}"></td>
+                    <td th:text="${task.description}"></td>
+                    <td th:text="${task.state.name}"></td>
+                    <td th:text="${task.initDate}"></td>
+                    <td><a th:href="'/projects/' + ${task.project.id}" th:text="${task.project.name}"></a></td>
+                    <td th:if="!${visitor}"><a th:href="'/projects/'+${task.project.id}+'/task/'+${task.id}+'/confirm'"><span class="glyphicon glyphicon-ok"></span></a></td>
+                </tr>
+            </table>
+            <div sec:authorize="hasAuthority('Admin')" th:if="!${visitor}" class="scrollable">
+                <hr>
+                <h4>Messages</h4>
+                <table class="table table-stripped table-hover">
+                    <tr>
+                        <td>From</td>
+                        <td>Message</td>
+                        <td>Date</td>
+                    </tr>
+                    <tr th:each="msg : ${messages}">
+                        <td th:text="${msg.sender}"></td>
+                        <td th:text="${msg.message}"></td>
+                        <td th:text="${msg.date}"></td>
+                    </tr>
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<footer th:replace="fragments :: footer"></footer>
+</body>
+</html>
+</body>
+</html>

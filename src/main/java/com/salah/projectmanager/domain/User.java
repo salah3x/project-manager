@@ -48,9 +48,8 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.DETACH)
     private List<Task> tasks;
-
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "request_id")
+    
+    @OneToOne(mappedBy = "user")
     private ManagerRequest request;
 
     public int getId() {

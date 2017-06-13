@@ -17,7 +17,8 @@ public class ManagerRequest {
     @Length(min = 3, max = 100, message = "Message must be between 3 and 100 characters")
     private String message;
 
-    @OneToOne(mappedBy = "request")
+    @OneToOne(cascade = CascadeType.DETACH)
+    @JoinColumn(name = "user_id")
     private User user;
 
     public int getId() {

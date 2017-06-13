@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/projects", "/projects/*", "/profile", "/project/*/task/*/confirm", "/managerReq/send").access("hasAuthority('Collaborator')")
                 .antMatchers("/managerReq/*/accept").access("hasAuthority('Admin')")
                 .and()
-                .formLogin().loginPage("/signin").defaultSuccessUrl("/projects", true).permitAll()
+                .formLogin().loginPage("/signin").defaultSuccessUrl("/profile", true).permitAll()
                 .usernameParameter("username").passwordParameter("password")
                 .and()
                 .logout().logoutSuccessUrl("/signin?signout").permitAll();

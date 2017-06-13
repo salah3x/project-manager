@@ -12,7 +12,7 @@ import java.util.List;
  */
 
 public interface AdminService {
-    List<ManagerRequest> getRequest();
+    List<ManagerRequest> getRequests();
 
     void acceptRequest(int idReq);
 
