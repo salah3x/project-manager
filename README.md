@@ -26,6 +26,7 @@ De même un **manager** est un collaborateur.
 ## Outils de developpement
 
 * Java 8
+* Gradle
 * Spring boot 1.5.3.RELEASE
 * H2 database
 * Sring data jpa
