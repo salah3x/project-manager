@@ -59,7 +59,7 @@ ou éxécuter directement le jar
 ./gradlw bootRepackage
 java -jar build/libs/project-manager-0.0.1-SNAPSHOT.jar
 ```
-* Allez à http://localhost:8080/(http://localhost:8080/)
+* Allez à http://localhost:8080/
 
 **Remarque 1:**
 La commande ./gradlw necessite une connexion internet et peut pendre du temps pour télécharger les dépendeces de l'application.
