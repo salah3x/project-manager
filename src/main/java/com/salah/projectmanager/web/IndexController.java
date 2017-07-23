@@ -25,8 +25,12 @@ public class IndexController {
     @Autowired
     private GuestService guestService;
 
-    @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    public void setPasswordEncoder(PasswordEncoder passwordEncoder) {
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(Model model) {

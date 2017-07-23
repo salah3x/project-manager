@@ -10,6 +10,7 @@ import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -47,6 +48,7 @@ public class IndexControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(indexController)
                 .setViewResolvers(viewResolver)
                 .build();
+        indexController.setPasswordEncoder(new BCryptPasswordEncoder());
     }
 
     @Test
@@ -97,7 +99,6 @@ public class IndexControllerTest {
                 .andExpect(view().name("signup"));
     }
     @Test
-    @Ignore//need to comment passworeencoder.encode() in IndexController
     public void testSignUp()throws Exception{
         when(guestService.signIn("salah")).thenReturn(null);
 
