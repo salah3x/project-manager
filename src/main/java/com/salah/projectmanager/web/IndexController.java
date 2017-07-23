@@ -1,10 +1,9 @@
 package com.salah.projectmanager.web;
 
 import com.salah.projectmanager.domain.Message;
+import com.salah.projectmanager.domain.User;
 import com.salah.projectmanager.service.GuestService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
-import java.security.Principal;
 
 /**
  * Created by bnadem on 5/21/17.
@@ -69,12 +67,12 @@ public class IndexController {
     @RequestMapping(value = "signup", method = RequestMethod.GET)
     public String signupGet(Model model) {
         model.addAttribute("title", "Sign up");
-        model.addAttribute("user", new com.salah.projectmanager.domain.User());
+        model.addAttribute("user", new User());
         return "signup";
     }
 
     @RequestMapping(value = "signup", method = RequestMethod.POST)
-    public String signupPost(Model model, @ModelAttribute @Valid com.salah.projectmanager.domain.User user, Errors errors) {
+    public String signupPost(Model model, @ModelAttribute @Valid User user, Errors errors) {
         if(errors.hasErrors()){
             model.addAttribute("title", "Sign up");
             model.addAttribute("error", "error");
